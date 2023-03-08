@@ -1,11 +1,17 @@
 fun main(){
     var car = Car("Nissan","Altima","Blue",5)
-    var bus = Bus("")
+    var bus = Bus("Izuzu","Scania","Yellow",65)
 
     car.carry(4)
-    car.carry(9)
+    car.carry(12)
     car.identity()
     car.calculateParkingFees(4)
+
+    println(bus.maxTripFare(50.0))
+    println(bus.calculateParkingFees(10))
+    bus.carry(4)
+    bus.carry(12)
+    bus.identity()
 
 
 
@@ -21,12 +27,12 @@ fun main(){
 //- calculateParkingFees(hours: Int) : Calculates and returns the
 //parking fees by multiplying the hours by 20 (1 point)
 
-class  Car (var make:String,var model:String,var color:String,var capacity:Int){
+ open class  Car (var make:String,var model:String,var color:String,var capacity:Int){
     fun carry(people:Int){
         var x = people-capacity
-        if (people >= capacity)
+        if (people <= capacity)
         println("Carrying $people passengers")
-       if (people<= capacity)
+       else
             println("Over capacity by $x people")
     }
     fun identity(){
@@ -51,14 +57,14 @@ class  Car (var make:String,var model:String,var color:String,var capacity:Int){
 //and call each of the functions on the objects.
 
 class Bus( make:String, model:String, color:String, capacity:Int):Car (make,model,color,capacity){
-    fun maxTripFare(fare:Double ,people: Int):Double{
-        var maxFare = fare * people
-        return fare
+    fun maxTripFare(fare:Double):Double{
+        var maxFare = fare*capacity
+        return maxFare
     }
 
-    override fun calculateParkingFees(hours: Int , people: Int): Int {
-        return super.calculateParkingFees(hours)
-        var output = hours * people
+    override fun calculateParkingFees(hours: Int ): Int {
+//        return super.calculateParkingFees(hours)
+        var output = hours * capacity
         return output
 
     }
